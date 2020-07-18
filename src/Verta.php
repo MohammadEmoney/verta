@@ -236,6 +236,9 @@ class Verta extends DateTime {
             $object = new DateTime();
             $instance = $object->getTimestamp();
         }
+        elseif (is_numeric($datetime)) {
+            $instance = $datetime;
+        }
         elseif (is_string($datetime)){
             $object = date_create($datetime);
             if ($object === false) {
@@ -245,9 +248,6 @@ class Verta extends DateTime {
         }
         elseif ($datetime instanceof DateTime || $datetime instanceof Verta) {
             $instance = $datetime->getTimestamp();
-        }
-        elseif (is_numeric($datetime)) {
-            $instance = $datetime;
         }
         else {
             throw new \InvalidArgumentException(sprintf("Unknown datetime '%s'", $datetime));
